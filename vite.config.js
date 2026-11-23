@@ -2,27 +2,16 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
 export default defineConfig({
-  plugins: [
-    react(),
-    {
-      name: 'kksi-rewrite',
-      configureServer(server) {
-        server.middlewares.use((req, res, next) => {
-          if (req.url === '/' || req.url === '/index.html') {
-            req.url = '/kksi.html';
-          }
-          next();
-        });
-      }
-    }
-  ],
+  plugins: [react()],
   server: {
-    port: 5173,
-    open: '/kksi.html'
+    port: 5173
   },
   build: {
     rollupOptions: {
-      input: 'kksi.html'
+      input: {
+        main: 'index.html',
+        kksi: 'kksi.html'
+      }
     }
   }
 });
