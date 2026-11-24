@@ -1,5 +1,5 @@
 import React from 'react';
-import { Award, BookmarkCheck, CheckCircle2 } from 'lucide-react';
+import { Award, BookmarkCheck, CheckCircle2, AlertCircle } from 'lucide-react';
 
 const LAB_METADATA = {
   RDBI: {
@@ -22,6 +22,7 @@ export default function LabCard({ labData, isPrimary }) {
   const code = labData.lab_code || 'RDBI';
   const meta = LAB_METADATA[code] || LAB_METADATA.RDBI;
   const score = Number(labData.composite_score || 0).toFixed(1);
+  const isDisq = Boolean(labData.is_disqualified);
 
   if (isPrimary) {
     /* TOP 1: KARTU REKOMENDASI UTAMA (DOMINAN, HERO, AKSEN ORANYE UNAND) */
@@ -73,15 +74,19 @@ export default function LabCard({ labData, isPrimary }) {
     );
   }
 
-  /* TOP 2: KARTU PILIHAN CADANGAN (SEKUNDER, TENANG, WARNA NETRAL) */
+  /* TOP 2: KARTU PILIHAN CADANGAN (SEKUNDER, TENANG, WARNA NETRAL / TERELIMINASI JIKA HANYA 1 LAB LOLOS) */
   return (
-    <div className="relative overflow-hidden rounded-3xl bg-slate-50/80 border-2 border-slate-900 shadow-[4px_4px_0px_0px_#0f172a] flex flex-col justify-between h-full transition-all print:rounded-xl print:break-inside-avoid">
+    <div className={`relative overflow-hidden rounded-3xl border-2 border-slate-900 shadow-[4px_4px_0px_0px_#0f172a] flex flex-col justify-between h-full transition-all print:rounded-xl print:break-inside-avoid ${isDisq ? 'bg-rose-50/50' : 'bg-slate-50/80'}`}>
       {/* Header Banner Cadangan */}
-      <div className="bg-slate-200 text-slate-700 px-5 py-2.5 border-b-2 border-slate-900 flex items-center justify-between print:py-1 print:px-3">
+      <div className={`${isDisq ? 'bg-rose-100 text-rose-900' : 'bg-slate-200 text-slate-700'} px-5 py-2.5 border-b-2 border-slate-900 flex items-center justify-between print:py-1 print:px-3`}>
         <div className="flex items-center gap-2">
-          <BookmarkCheck className="w-4 h-4 text-slate-600 stroke-[2.5] print:w-3.5 print:h-3.5" />
-          <span className="text-xs font-bold uppercase tracking-wider text-slate-700 print:text-[10px]">
-            Pilihan Cadangan (Peringkat #2)
+          {isDisq ? (
+            <AlertCircle className="w-4 h-4 text-rose-700 stroke-[2.5] print:w-3.5 print:h-3.5" />
+          ) : (
+            <BookmarkCheck className="w-4 h-4 text-slate-600 stroke-[2.5] print:w-3.5 print:h-3.5" />
+          )}
+          <span className="text-xs font-bold uppercase tracking-wider print:text-[10px]">
+            {isDisq ? 'Peringkat #2 (Tereliminasi Prasyarat)' : 'Pilihan Cadangan (Peringkat #2)'}
           </span>
         </div>
         <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-white border border-slate-400 text-slate-700 print:py-0 print:px-2 print:text-[9px]">
@@ -93,15 +98,21 @@ export default function LabCard({ labData, isPrimary }) {
       <div className="p-5 sm:p-6 space-y-4 flex-1 flex flex-col justify-between print:p-2.5 print:space-y-1.5">
         <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 print:gap-2">
           <div className="space-y-1.5 print:space-y-0.5">
-            <h3 className="text-xl sm:text-2xl font-heading font-black text-slate-800 leading-snug print:text-sm">
+            <h3 className={`text-xl sm:text-2xl font-heading font-black leading-snug print:text-sm ${isDisq ? 'text-slate-600 line-through' : 'text-slate-800'}`}>
               {labData.lab_name}
             </h3>
             <p className="text-xs text-slate-500 font-medium leading-relaxed print:text-[9px] print:leading-tight">
               {meta.tagline}
             </p>
-            <p className="text-[11px] text-slate-500 font-medium italic pt-1 print:hidden">
-              Opsi alternatif jika rekomendasi utama telah memenuhi kuota.
-            </p>
+            {isDisq && labData.disqualification_reason ? (
+              <p className="text-[11px] text-rose-700 font-bold pt-1 print:text-[8.5px]">
+                {labData.disqualification_reason}
+              </p>
+            ) : (
+              <p className="text-[11px] text-slate-500 font-medium italic pt-1 print:hidden">
+                Opsi alternatif jika rekomendasi utama telah memenuhi kuota.
+              </p>
+            )}
           </div>
 
           {/* Kotak Skor Sekunder */}
@@ -109,7 +120,7 @@ export default function LabCard({ labData, isPrimary }) {
             <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-0.5 print:text-[8px] print:mb-0">
               Skor Afinitas
             </span>
-            <span className="text-3xl font-heading font-black text-slate-700 print:text-xl">
+            <span className={`text-3xl font-heading font-black print:text-xl ${isDisq ? 'text-slate-400 line-through' : 'text-slate-700'}`}>
               {score}%
             </span>
           </div>

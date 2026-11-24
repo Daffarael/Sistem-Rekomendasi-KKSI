@@ -1,5 +1,5 @@
 import React from 'react';
-import { Award, BarChart3 } from 'lucide-react';
+import { Award, BarChart3, AlertCircle } from 'lucide-react';
 
 const LAB_FULL_NAMES = {
   RDBI: 'Rekayasa Data & Business Intelligence',
@@ -44,8 +44,9 @@ export default function RankTable({ rankings }) {
           </thead>
           <tbody className="divide-y-2 divide-slate-200 font-sans">
             {rankings.map((item, idx) => {
-              const isTop = idx === 0;
-              const isSecond = idx === 1;
+              const isDisq = Boolean(item.is_disqualified);
+              const isTop = idx === 0 && !isDisq;
+              const isSecond = idx === 1 && !isDisq;
               const score = Number(item.composite_score || 0).toFixed(1);
               const labCode = item.lab_code || 'LAB';
               const labName = item.lab_name || LAB_FULL_NAMES[labCode] || labCode;
@@ -54,7 +55,9 @@ export default function RankTable({ rankings }) {
                 <tr
                   key={labCode}
                   className={`transition-colors ${
-                    isTop
+                    isDisq
+                      ? 'bg-rose-50/40 text-slate-500'
+                      : isTop
                       ? 'bg-orange-50/70 font-medium'
                       : isSecond
                       ? 'bg-amber-50/40'
@@ -65,7 +68,9 @@ export default function RankTable({ rankings }) {
                   <td className="py-4 px-4 sm:px-6 text-center print:py-1 print:px-2">
                     <span
                       className={`inline-flex items-center justify-center w-8 h-8 rounded-xl text-xs font-black border-2 border-slate-900 print:w-5 print:h-5 print:text-[8.5px] ${
-                        isTop
+                        isDisq
+                          ? 'bg-rose-100 text-rose-900 shadow-[1px_1px_0px_0px_#0f172a]'
+                          : isTop
                           ? 'bg-orange-500 text-white shadow-[2px_2px_0px_0px_#0f172a]'
                           : isSecond
                           ? 'bg-amber-200 text-slate-900 shadow-[1.5px_1.5px_0px_0px_#0f172a]'
@@ -80,7 +85,7 @@ export default function RankTable({ rankings }) {
                   <td className="py-4 px-4 sm:px-6 print:py-1 print:px-2.5">
                     <div className="space-y-0.5 print:space-y-0">
                       <div className="flex items-center gap-2 print:gap-1.5">
-                        <span className="font-heading font-black text-sm text-slate-900 print:text-[10px]">
+                        <span className={`font-heading font-black text-sm print:text-[10px] ${isDisq ? 'text-slate-600 line-through' : 'text-slate-900'}`}>
                           {labCode}
                         </span>
                         {isTop && (
@@ -93,10 +98,20 @@ export default function RankTable({ rankings }) {
                             Cadangan
                           </span>
                         )}
+                        {isDisq && (
+                          <span className="inline-flex items-center gap-1 text-[10px] font-black px-2 py-0.5 rounded-full bg-rose-100 text-rose-900 border border-slate-900 print:text-[7.5px] print:px-1.5 print:py-0">
+                            <AlertCircle className="w-3 h-3 stroke-[2.5] print:w-2 print:h-2" /> Prasyarat Belum Terpenuhi
+                          </span>
+                        )}
                       </div>
                       <div className="text-xs text-slate-600 font-medium print:text-[8.5px] print:leading-tight">
                         {labName}
                       </div>
+                      {isDisq && item.disqualification_reason && (
+                        <div className="text-[11px] text-rose-700 font-bold pt-0.5 print:text-[8px] print:leading-tight">
+                          {item.disqualification_reason}
+                        </div>
+                      )}
                     </div>
                   </td>
 
@@ -104,13 +119,21 @@ export default function RankTable({ rankings }) {
                   <td className="py-4 px-4 sm:px-6 print:py-1 print:px-2.5">
                     <div className="space-y-1.5 print:space-y-0.5">
                       <div className="flex justify-between text-xs font-black text-slate-900 print:text-[8.5px]">
-                        <span>Skor Kecocokan</span>
-                        <span className={isTop ? 'text-orange-600' : 'text-slate-800'}>{score}%</span>
+                        <span className={isDisq ? 'text-slate-500' : ''}>Skor Kecocokan</span>
+                        <span className={isDisq ? 'text-slate-500 line-through' : isTop ? 'text-orange-600' : 'text-slate-800'}>
+                          {score}%
+                        </span>
                       </div>
                       <div className="w-full h-3 bg-slate-100 border-2 border-slate-900 rounded-full overflow-hidden p-0.5 print:h-1.5 print:p-0">
                         <div
                           className={`h-full rounded-full border-r-2 border-slate-900 ${
-                            isTop ? 'bg-orange-500' : isSecond ? 'bg-amber-400' : 'bg-slate-400'
+                            isDisq
+                              ? 'bg-rose-300'
+                              : isTop
+                              ? 'bg-orange-500'
+                              : isSecond
+                              ? 'bg-amber-400'
+                              : 'bg-slate-400'
                           }`}
                           style={{ width: `${Math.min(100, Math.max(0, score))}%` }}
                         />
@@ -120,7 +143,11 @@ export default function RankTable({ rankings }) {
 
                   {/* Status */}
                   <td className="py-4 px-4 sm:px-6 text-center print:py-1 print:px-2">
-                    {isTop ? (
+                    {isDisq ? (
+                      <span className="inline-block px-2.5 py-1 rounded-full text-[10px] font-black bg-rose-100 border border-slate-900 text-rose-900 print:text-[8px] print:px-1.5 print:py-0">
+                        Tereliminasi
+                      </span>
+                    ) : isTop ? (
                       <span className="inline-block px-2.5 py-1 rounded-full text-[10px] font-black bg-emerald-100 border border-slate-900 text-emerald-900 print:text-[8px] print:px-1.5 print:py-0">
                         Prioritas #1
                       </span>
