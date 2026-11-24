@@ -141,26 +141,5 @@ export default function RankTable({ rankings }) {
         </table>
       </div>
     </div>
-                    {isTop ? (
-                      <span className="inline-block px-2.5 py-1 rounded-full text-[10px] font-black bg-emerald-100 border border-slate-900 text-emerald-900">
-                        Prioritas #1
-                      </span>
-                    ) : isSecond ? (
-                      <span className="inline-block px-2.5 py-1 rounded-full text-[10px] font-black bg-amber-100 border border-slate-900 text-amber-900">
-                        Alternatif #2
-                      </span>
-                    ) : (
-                      <span className="inline-block px-2.5 py-1 rounded-full text-[10px] font-bold text-slate-500">
-                        Cadangan
-                      </span>
-                    )}
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
-    </div>
   );
 }
