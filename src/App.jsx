@@ -336,32 +336,29 @@ export default function App() {
                 {/* Kasus 2: Lolos Evaluasi & Rekomendasi Siap */}
                 {isEligible && (
                   <div className="space-y-8 print:space-y-2">
-                    {/* Kop Dokumen Resmi Khusus Cetak 1 Lembar A4 */}
+                    {/* Header Dokumen Cetak Ringkas */}
                     <div className="hidden print:block mb-2 pb-2 border-b-2 border-slate-900">
                       <div className="flex items-center justify-between">
                         <div>
                           <p className="text-[9px] font-black uppercase tracking-widest text-orange-600">
-                            Departemen Sistem Informasi &bull; Fakultas Teknologi Informasi &bull; Universitas Andalas
+                            Departemen Sistem Informasi &bull; Universitas Andalas
                           </p>
                           <h1 className="text-base font-heading font-black text-slate-900 tracking-tight mt-0.5">
                             Laporan Hasil Rekomendasi Asisten Laboratorium KKSI
                           </h1>
-                          <p className="text-[9px] text-slate-600 font-medium">
-                            Sistem Pendukung Keputusan Penempatan Asisten Laboratorium Berbasis Hybrid Machine Learning
-                          </p>
                         </div>
-                        <div className="text-right text-[9px] font-bold text-slate-600 space-y-0.5">
+                        <div className="text-right text-[9px] text-slate-600 font-bold space-y-0.5">
                           <p className="inline-block px-2 py-0.5 rounded bg-emerald-100 text-emerald-900 border border-slate-900 font-black">
-                            Lolos Syarat Administratif
+                            Lolos Administratif
                           </p>
-                          <p className="text-slate-500">
+                          <p className="text-slate-500 font-medium">
                             Dicetak: {new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}
                           </p>
                         </div>
                       </div>
 
                       {/* Ringkasan Mahasiswa Format Strip Horizontal */}
-                      <div className="mt-2 p-1.5 rounded-lg border border-slate-900 bg-orange-50/50 grid grid-cols-3 text-[10px] font-bold text-slate-800">
+                      <div className="mt-1.5 p-1.5 rounded-lg border border-slate-900 bg-orange-50/50 grid grid-cols-3 text-[9.5px] font-bold text-slate-800">
                         <div><span className="text-slate-500 font-medium">Semester:</span> {formData['Semester Pendaftaran']}</div>
                         <div><span className="text-slate-500 font-medium">IPK Terdaftar:</span> {formData['IPK Kumulatif']}</div>
                         <div><span className="text-slate-500 font-medium">Margin Keunggulan:</span> <span className="text-emerald-700">+{separationMargin}%</span></div>
@@ -417,18 +414,6 @@ export default function App() {
 
                     {/* Tabel Pemeringkatan 4 Laboratorium */}
                     <RankTable rankings={allRankings} />
-
-                    {/* Catatan Validasi Resmi Dokumen (Bagian Bawah Halaman 1) */}
-                    <div className="hidden print:flex items-center justify-between pt-2 text-[8.5px] text-slate-500 border-t border-slate-300 mt-2 print:break-inside-avoid">
-                      <div>
-                        <p className="font-bold text-slate-900">Departemen Sistem Informasi &bull; Universitas Andalas</p>
-                        <p>Kelompok Keilmuan Sistem Informasi (KKSI)</p>
-                      </div>
-                      <div className="text-right">
-                        <p>Dokumen resmi ini diterbitkan secara otomatis oleh sistem</p>
-                        <p className="font-bold text-emerald-800">Tervalidasi Sistem Rekomendasi KKSI</p>
-                      </div>
-                    </div>
 
                     {/* Tombol Aksi Akhir */}
                     <div className="p-6 bg-white rounded-3xl border-2 border-slate-900 shadow-[4px_4px_0px_0px_#0f172a] flex flex-col sm:flex-row items-center justify-between gap-4 print:hidden">

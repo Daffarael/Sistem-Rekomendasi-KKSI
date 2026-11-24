@@ -50,9 +50,9 @@ export default function LabCard({ labData, isPrimary }) {
               <p className="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed print:text-[9px] print:leading-tight">
                 {meta.tagline}
               </p>
-              <div className="pt-1 print:pt-0.5">
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 border border-slate-900 text-emerald-950 text-xs font-bold shadow-[1.5px_1.5px_0px_0px_#0f172a] print:py-0 print:px-1.5 print:text-[8.5px]">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-700 stroke-[2.5] print:w-2.5 print:h-2.5" />
+              <div className="pt-1 print:hidden">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 border border-slate-900 text-emerald-950 text-xs font-bold shadow-[1.5px_1.5px_0px_0px_#0f172a]">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-700 stroke-[2.5]" />
                   <span>Kecocokan Tertinggi Berdasarkan Profil Anda</span>
                 </div>
               </div>

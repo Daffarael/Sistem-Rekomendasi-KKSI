@@ -115,7 +115,7 @@ export default function RadarChart({ formData, rankings }) {
             Radar Profil Kompetensi Mahasiswa
           </h3>
         </div>
-        <span className="text-xs font-black px-3 py-1 rounded-full bg-amber-100 text-slate-900 border-2 border-slate-900 shadow-[1.5px_1.5px_0px_0px_#0f172a] print:py-0 print:px-2 print:text-[8.5px]">
+        <span className="text-xs font-black px-3 py-1 rounded-full bg-amber-100 text-slate-900 border-2 border-slate-900 shadow-[1.5px_1.5px_0px_0px_#0f172a] print:hidden">
           5 Sumbu Keilmuan
         </span>
       </div>
