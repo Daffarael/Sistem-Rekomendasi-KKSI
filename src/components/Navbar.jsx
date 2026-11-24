@@ -1,5 +1,5 @@
 import React from 'react';
-import { Sparkles, RotateCcw, ArrowLeft } from 'lucide-react';
+import { Sparkles, RotateCcw } from 'lucide-react';
 
 export default function Navbar({ onReset, hasResult, isRecommenderOpen, onStart, onBackToLanding }) {
   const scrollTo = (id) => {
@@ -70,7 +70,6 @@ export default function Navbar({ onReset, hasResult, isRecommenderOpen, onStart,
               onClick={onBackToLanding}
               className="paper-btn-secondary px-3.5 py-2 text-xs inline-flex items-center gap-1.5"
             >
-              <ArrowLeft className="w-3.5 h-3.5" />
               <span>Kembali ke Beranda</span>
             </button>
 

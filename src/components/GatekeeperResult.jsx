@@ -1,5 +1,5 @@
 import React from 'react';
-import { AlertTriangle, ArrowLeft, BookOpen, ShieldAlert } from 'lucide-react';
+import { AlertTriangle, BookOpen, ShieldAlert } from 'lucide-react';
 
 export default function GatekeeperResult({ result, onBackToForm }) {
   const violations = result?.violations || [];
@@ -79,7 +79,6 @@ export default function GatekeeperResult({ result, onBackToForm }) {
           onClick={onBackToForm}
           className="paper-btn-primary px-7 py-3.5 text-xs sm:text-sm inline-flex items-center gap-2"
         >
-          <ArrowLeft className="w-4 h-4 stroke-[2.5]" />
           <span>Koreksi Data Pendaftaran</span>
         </button>
       </div>

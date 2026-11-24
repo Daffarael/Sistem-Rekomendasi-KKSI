@@ -1,5 +1,5 @@
 import React from 'react';
-import { Database, Code2, Building2, Network, Sparkles, ArrowRight } from 'lucide-react';
+import { Database, Code2, Building2, Network, Sparkles } from 'lucide-react';
 
 const LABS = [
   {

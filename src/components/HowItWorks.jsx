@@ -1,5 +1,5 @@
 import React from 'react';
-import { Smartphone, Target, Sparkles, ArrowRight } from 'lucide-react';
+import { Smartphone, Target, Sparkles } from 'lucide-react';
 
 export default function HowItWorks({ onStart }) {
   return (

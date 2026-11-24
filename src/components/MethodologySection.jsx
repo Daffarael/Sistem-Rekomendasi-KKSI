@@ -1,5 +1,5 @@
 import React from 'react';
-import { ShieldAlert, Cpu, BarChart3, CheckCircle2, ArrowRight } from 'lucide-react';
+import { ShieldAlert, Cpu, BarChart3, CheckCircle2 } from 'lucide-react';
 
 export default function MethodologySection() {
   return (

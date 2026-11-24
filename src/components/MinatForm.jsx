@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowLeft, Sparkles, Compass, Loader2 } from 'lucide-react';
+import { Sparkles, Compass, Loader2 } from 'lucide-react';
 
 const INTERESTS_LIST = [
   {
@@ -114,7 +114,6 @@ export default function MinatForm({ formData, onChange, onSubmit, onPrev, isLoad
           disabled={isLoading}
           className="paper-btn-secondary px-6 py-3.5 text-xs sm:text-sm inline-flex items-center gap-2"
         >
-          <ArrowLeft className="w-4 h-4 stroke-[2.5]" />
           <span>Kembali ke Kemahiran Tools</span>
         </button>
 

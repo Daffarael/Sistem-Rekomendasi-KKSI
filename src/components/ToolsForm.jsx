@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowLeft, ArrowRight, Wrench } from 'lucide-react';
+import { Wrench } from 'lucide-react';
 
 const TOOLS_LIST = [
   {
@@ -133,7 +133,6 @@ export default function ToolsForm({ formData, onChange, onNext, onPrev }) {
           onClick={onPrev}
           className="paper-btn-secondary px-6 py-3.5 text-xs sm:text-sm inline-flex items-center gap-2"
         >
-          <ArrowLeft className="w-4 h-4 stroke-[2.5]" />
           <span>Kembali ke Data Akademik</span>
         </button>
 
@@ -142,7 +141,6 @@ export default function ToolsForm({ formData, onChange, onNext, onPrev }) {
           className="paper-btn-primary min-w-[240px] px-7 py-3.5 text-xs sm:text-sm inline-flex items-center justify-center gap-2"
         >
           <span>Lanjut ke Minat Keilmuan</span>
-          <ArrowRight className="w-4 h-4 stroke-[2.5]" />
         </button>
       </div>
     </form>

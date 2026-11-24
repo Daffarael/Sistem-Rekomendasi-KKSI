@@ -8,9 +8,7 @@ import {
   RotateCcw, 
   Printer, 
   CheckCircle2, 
-  AlertCircle,
-  ArrowRight,
-  ArrowLeft
+  AlertCircle
 } from 'lucide-react';
 
 import Navbar from './components/Navbar';
@@ -193,7 +191,6 @@ export default function App() {
                   onClick={handleBackToLanding}
                   className="inline-flex items-center gap-1.5 text-xs font-black text-orange-600 hover:text-slate-900 transition-colors cursor-pointer mb-2"
                 >
-                  <ArrowLeft className="w-3.5 h-3.5" />
                   <span>Kembali ke Halaman Beranda</span>
                 </button>
                 <div className="flex items-center gap-2">

@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { ArrowRight, BookOpen, GraduationCap, AlertCircle, ChevronDown, Check } from 'lucide-react';
+import { BookOpen, GraduationCap, AlertCircle, ChevronDown, Check } from 'lucide-react';
 
 const GRADE_OPTIONS = [
   { value: 'A', label: 'A (4.00)' },
@@ -228,7 +228,6 @@ export default function AkademikForm({ formData, onChange, onNext }) {
           className="paper-btn-primary min-w-[240px] px-7 py-3.5 text-xs sm:text-sm inline-flex items-center justify-center gap-2"
         >
           <span>Lanjut ke Kemahiran Tools</span>
-          <ArrowRight className="w-4 h-4 stroke-[2.5]" />
         </button>
       </div>
     </form>
