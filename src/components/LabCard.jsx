@@ -22,8 +22,6 @@ export default function LabCard({ labData, isPrimary }) {
   const code = labData.lab_code || 'RDBI';
   const meta = LAB_METADATA[code] || LAB_METADATA.RDBI;
   const score = Number(labData.composite_score || 0).toFixed(1);
-  const cosScore = Number(labData.cosine_similarity || 0).toFixed(1);
-  const xgbScore = Number(labData.xgb_probability || 0).toFixed(1);
 
   if (isPrimary) {
     /* TOP 1: KARTU REKOMENDASI UTAMA (DOMINAN, HERO, AKSEN ORANYE UNAND) */
@@ -70,19 +68,6 @@ export default function LabCard({ labData, isPrimary }) {
               </span>
             </div>
           </div>
-
-          {/* 2 Indikator Metrik Pendukung */}
-          <div className="grid grid-cols-2 gap-3 pt-5 border-t-2 border-slate-900/10 text-xs">
-            <div className="p-3.5 rounded-xl bg-white border-2 border-slate-900 shadow-[2px_2px_0px_0px_#0f172a]">
-              <span className="text-slate-500 font-bold block text-[11px]">Kemiripan Vektor (Cosine):</span>
-              <strong className="text-slate-900 font-black text-base">{cosScore}%</strong>
-            </div>
-
-            <div className="p-3.5 rounded-xl bg-white border-2 border-slate-900 shadow-[2px_2px_0px_0px_#0f172a]">
-              <span className="text-slate-500 font-bold block text-[11px]">Probabilitas Model (XGBoost):</span>
-              <strong className="text-slate-900 font-black text-base">{xgbScore}%</strong>
-            </div>
-          </div>
         </div>
       </div>
     );
@@ -127,19 +112,6 @@ export default function LabCard({ labData, isPrimary }) {
             <span className="text-3xl font-heading font-black text-slate-700">
               {score}%
             </span>
-          </div>
-        </div>
-
-        {/* 2 Indikator Metrik Sekunder */}
-        <div className="grid grid-cols-2 gap-2.5 pt-4 border-t border-slate-200 text-xs">
-          <div className="p-2.5 rounded-lg bg-white border border-slate-300">
-            <span className="text-slate-400 font-bold block text-[10px]">Kemiripan Vektor:</span>
-            <strong className="text-slate-700 font-bold text-sm">{cosScore}%</strong>
-          </div>
-
-          <div className="p-2.5 rounded-lg bg-white border border-slate-300">
-            <span className="text-slate-400 font-bold block text-[10px]">Probabilitas Model:</span>
-            <strong className="text-slate-700 font-bold text-sm">{xgbScore}%</strong>
           </div>
         </div>
       </div>

@@ -24,7 +24,7 @@ export default function RankTable({ rankings }) {
             </h3>
           </div>
           <p className="text-xs sm:text-sm text-slate-600 mt-1 font-medium">
-            Perbandingan skor komposit hybrid, kemiripan sentroid (Cosine), dan probabilitas model Machine Learning (XGBoost).
+            Perbandingan peringkat dan tingkat kecocokan profil Anda terhadap seluruh laboratorium KKSI.
           </p>
         </div>
         <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-black bg-white border-2 border-slate-900 text-slate-900 shadow-[1.5px_1.5px_0px_0px_#0f172a] self-start sm:self-auto">
@@ -38,9 +38,7 @@ export default function RankTable({ rankings }) {
             <tr className="bg-amber-100/70 border-b-2 border-slate-900 text-xs font-black text-slate-900 uppercase tracking-wider">
               <th className="py-3.5 px-4 sm:px-6 text-center w-20">Peringkat</th>
               <th className="py-3.5 px-4 sm:px-6">Laboratorium</th>
-              <th className="py-3.5 px-4 sm:px-6 w-52">Skor Komposit Hybrid</th>
-              <th className="py-3.5 px-4 sm:px-6 text-center">Cosine Similarity</th>
-              <th className="py-3.5 px-4 sm:px-6 text-center">XGBoost Prob</th>
+              <th className="py-3.5 px-4 sm:px-6 w-60">Tingkat Kecocokan</th>
               <th className="py-3.5 px-4 sm:px-6 text-center">Status</th>
             </tr>
           </thead>
@@ -49,8 +47,6 @@ export default function RankTable({ rankings }) {
               const isTop = idx === 0;
               const isSecond = idx === 1;
               const score = Number(item.composite_score || 0).toFixed(1);
-              const cos = Number(item.cosine_similarity || 0).toFixed(1);
-              const xgb = Number(item.xgb_probability || 0).toFixed(1);
               const labCode = item.lab_code || 'LAB';
               const labName = item.lab_name || LAB_FULL_NAMES[labCode] || labCode;
 
@@ -108,7 +104,7 @@ export default function RankTable({ rankings }) {
                   <td className="py-4 px-4 sm:px-6">
                     <div className="space-y-1.5">
                       <div className="flex justify-between text-xs font-black text-slate-900">
-                        <span>Skor Total</span>
+                        <span>Skor Kecocokan</span>
                         <span className={isTop ? 'text-orange-600' : 'text-slate-800'}>{score}%</span>
                       </div>
                       <div className="w-full h-3 bg-slate-100 border-2 border-slate-900 rounded-full overflow-hidden p-0.5">
@@ -120,16 +116,6 @@ export default function RankTable({ rankings }) {
                         />
                       </div>
                     </div>
-                  </td>
-
-                  {/* Cosine */}
-                  <td className="py-4 px-4 sm:px-6 text-center font-bold text-xs text-slate-800">
-                    {cos}%
-                  </td>
-
-                  {/* XGBoost */}
-                  <td className="py-4 px-4 sm:px-6 text-center font-bold text-xs text-slate-800">
-                    {xgb}%
                   </td>
 
                   {/* Status */}
