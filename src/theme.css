@@ -90,21 +90,20 @@
   animation: fadeIn 0.12s ease-out forwards;
 }
 
-
 /* ==========================================================================
-   PRINT / PDF EXPORT STYLES (Tata Letak Resmi Laporan A4 2 Halaman Presisi)
+   PRINT / PDF EXPORT STYLES (Tata Letak Resmi Tepat 1 Lembar A4)
    ========================================================================== */
 @media print {
   @page {
     size: A4 portrait;
-    margin: 8mm 10mm 8mm 10mm;
+    margin: 6mm 8mm 6mm 8mm;
   }
 
   html, body {
     background: #ffffff !important;
     color: #0f172a !important;
-    font-size: 10pt !important;
-    line-height: 1.35 !important;
+    font-size: 9pt !important;
+    line-height: 1.25 !important;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
   }
@@ -147,20 +146,10 @@
     page-break-inside: avoid !important;
   }
 
-  /* Atur pemisah halaman yang presisi */
-  .print-page-break {
-    break-before: page !important;
-    page-break-before: always !important;
-    height: 0 !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    border: none !important;
-  }
-
   /* Border rapi dan tegas saat print */
   .border-\[2\.5px\],
   .border-2 {
-    border-width: 1.5px !important;
+    border-width: 1px !important;
     border-color: #0f172a !important;
   }
 
@@ -177,8 +166,9 @@
     margin: 0 !important;
   }
 
-  /* Penyesuaian spacing vertikal agar pas di 2 lembar A4 */
-  .space-y-8 > :not([hidden]) ~ :not([hidden]) {
-    margin-top: 10px !important;
+  /* Penyesuaian spacing vertikal agar pas di 1 lembar A4 */
+  .space-y-8 > :not([hidden]) ~ :not([hidden]),
+  .print\:space-y-2\.5 > :not([hidden]) ~ :not([hidden]) {
+    margin-top: 7px !important;
   }
 }
