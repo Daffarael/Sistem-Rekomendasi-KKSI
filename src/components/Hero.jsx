@@ -54,13 +54,8 @@ export default function Hero({ onStart }) {
               </button>
             </div>
 
-            {/* 3 Indikator Centang Bergaya Stiker */}
+            {/* Indikator Centang Bergaya Stiker */}
             <div className="flex flex-wrap items-center gap-3 pt-3 text-xs font-bold text-slate-900">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border-2 border-slate-900 bg-emerald-100 shadow-[2px_2px_0px_0px_#0f172a]">
-                <Check className="w-3.5 h-3.5 text-emerald-800 stroke-[3]" />
-                <span>Gratis untuk mahasiswa</span>
-              </div>
-
               <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border-2 border-slate-900 bg-amber-100 shadow-[2px_2px_0px_0px_#0f172a]">
                 <Check className="w-3.5 h-3.5 text-amber-800 stroke-[3]" />
                 <span>Hasil instan</span>
