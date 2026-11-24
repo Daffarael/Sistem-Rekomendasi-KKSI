@@ -107,28 +107,28 @@ export default function RadarChart({ formData, rankings }) {
     .join(' ');
 
   return (
-    <div className="bg-white rounded-3xl border-2 border-slate-900 shadow-[5px_5px_0px_0px_#0f172a] p-6 sm:p-8 space-y-6">
-      <div className="flex items-center justify-between border-b-2 border-slate-200 pb-4">
+    <div className="bg-white rounded-3xl border-2 border-slate-900 shadow-[5px_5px_0px_0px_#0f172a] p-6 sm:p-8 space-y-6 print:p-4 print:rounded-2xl print:space-y-3 print:break-inside-avoid">
+      <div className="flex items-center justify-between border-b-2 border-slate-200 pb-4 print:pb-2">
         <div className="flex items-center gap-2">
-          <Compass className="w-5 h-5 text-orange-600 stroke-[2.5]" />
-          <h3 className="font-heading font-black text-slate-900 text-base sm:text-lg">
+          <Compass className="w-5 h-5 text-orange-600 stroke-[2.5] print:w-4 print:h-4" />
+          <h3 className="font-heading font-black text-slate-900 text-base sm:text-lg print:text-sm">
             Radar Profil Kompetensi Mahasiswa
           </h3>
         </div>
-        <span className="text-xs font-black px-3 py-1 rounded-full bg-amber-100 text-slate-900 border-2 border-slate-900 shadow-[1.5px_1.5px_0px_0px_#0f172a]">
+        <span className="text-xs font-black px-3 py-1 rounded-full bg-amber-100 text-slate-900 border-2 border-slate-900 shadow-[1.5px_1.5px_0px_0px_#0f172a] print:py-0.5 print:text-[10px]">
           5 Sumbu Keilmuan
         </span>
       </div>
 
-      <p className="text-xs sm:text-sm text-slate-600 font-medium leading-relaxed">
+      <p className="text-xs sm:text-sm text-slate-600 font-medium leading-relaxed print:text-[10px]">
         Visualisasi pemetaan 5 pilar kompetensi yang mencakup perpaduan nilai mata kuliah, kemahiran tools perangkat lunak, dan minat laboratorium mahasiswa.
       </p>
 
       {/* Grid Kontainer: Radar SVG di Kiri, Rincian Nilai di Kanan Tanpa Tabrakan */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center pt-2">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center pt-2 print:grid-cols-12 print:gap-4 print:pt-0">
         {/* Kolom Kiri: Canvas Radar SVG yang Lapang dan Terisolasi */}
-        <div className="lg:col-span-7 flex justify-center w-full">
-          <div className="w-full max-w-[420px]">
+        <div className="lg:col-span-7 print:col-span-6 flex justify-center w-full">
+          <div className="w-full max-w-[420px] print:max-w-[260px]">
             <svg viewBox="0 0 480 360" className="w-full h-auto drop-shadow-sm select-none">
               {/* Background Grid Polygons */}
               {gridPolygons.map((points, idx) => (
@@ -232,17 +232,17 @@ export default function RadarChart({ formData, rankings }) {
         </div>
 
         {/* Kolom Kanan: Rincian Kartu Nilai Kompetensi */}
-        <div className="lg:col-span-5 w-full space-y-2.5">
-          <div className="text-xs font-black text-slate-900 uppercase tracking-wider mb-2">
+        <div className="lg:col-span-5 print:col-span-6 w-full space-y-2.5 print:space-y-1.5">
+          <div className="text-xs font-black text-slate-900 uppercase tracking-wider mb-2 print:mb-1 print:text-[10px]">
             Rincian Nilai Kompetensi:
           </div>
           {axes.map((axis, idx) => (
             <div
               key={idx}
-              className="p-3.5 rounded-2xl bg-orange-50/60 border-2 border-slate-900 shadow-[2px_2px_0px_0px_#0f172a] flex items-center justify-between text-xs"
+              className="p-3.5 rounded-2xl bg-orange-50/60 border-2 border-slate-900 shadow-[2px_2px_0px_0px_#0f172a] flex items-center justify-between text-xs print:p-2 print:rounded-xl print:text-[11px]"
             >
               <span className="text-slate-800 font-bold">{axis.label}</span>
-              <span className="font-heading font-black text-orange-600 bg-white px-2.5 py-0.5 rounded-lg border border-slate-900 shadow-[1px_1px_0px_0px_#0f172a]">
+              <span className="font-heading font-black text-orange-600 bg-white px-2.5 py-0.5 rounded-lg border border-slate-900 shadow-[1px_1px_0px_0px_#0f172a] print:px-2 print:py-0">
                 {axis.value}%
               </span>
             </div>

@@ -184,7 +184,7 @@ export default function App() {
         <main className="flex-1 py-10 sm:py-16 bg-[#FDFBF7] animate-fadeIn">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
             {/* Header Formulir & Tombol Kembali */}
-            <div className="bg-white p-6 sm:p-8 rounded-3xl border-2 border-slate-900 shadow-[5px_5px_0px_0px_#0f172a] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div className="bg-white p-6 sm:p-8 rounded-3xl border-2 border-slate-900 shadow-[5px_5px_0px_0px_#0f172a] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 print:hidden">
               <div>
                 <button
                   type="button"
@@ -335,24 +335,49 @@ export default function App() {
 
                 {/* Kasus 2: Lolos Evaluasi & Rekomendasi Siap */}
                 {isEligible && (
-                  <div className="space-y-8">
-                    {/* Banner Status Lolos (Hand-Drawn / Neo-Brutalist) */}
-                    <div className="p-6 sm:p-8 rounded-3xl bg-orange-500 border-[2.5px] border-slate-900 text-white shadow-[6px_6px_0px_0px_#0f172a] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
-                      <div className="space-y-2">
-                        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black bg-white border-2 border-slate-900 text-slate-900 shadow-[1.5px_1.5px_0px_0px_#0f172a]">
-                          <Sparkles className="w-3.5 h-3.5 text-orange-600" />
-                          <span>HASIL REKOMENDASI</span>
+                  <div className="space-y-8 print:space-y-4">
+                    {/* Kop Dokumen Resmi Khusus Cetak / Unduh PDF (Halaman 1) */}
+                    <div className="hidden print:block mb-4 pb-3 border-b-2 border-slate-900">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <p className="text-[10px] font-black uppercase tracking-widest text-orange-600">
+                            Departemen Sistem Informasi &bull; Fakultas Teknologi Informasi &bull; Universitas Andalas
+                          </p>
+                          <h1 className="text-xl font-heading font-black text-slate-900 tracking-tight mt-0.5">
+                            Laporan Hasil Rekomendasi Asisten Laboratorium KKSI
+                          </h1>
+                          <p className="text-[10px] text-slate-600 font-medium">
+                            Sistem Pendukung Keputusan Penempatan Asisten Laboratorium Berbasis Hybrid Machine Learning
+                          </p>
                         </div>
-                        <h2 className="text-2xl sm:text-3xl font-heading font-black tracking-tight text-white drop-shadow-sm">
+                        <div className="text-right text-[10px] font-bold text-slate-600 space-y-0.5">
+                          <p className="inline-block px-2.5 py-0.5 rounded bg-emerald-100 text-emerald-900 border border-slate-900 font-black">
+                            Lolos Syarat Administratif
+                          </p>
+                          <p className="text-slate-500">
+                            Dicetak: {new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Banner Status Lolos (Hand-Drawn / Neo-Brutalist) */}
+                    <div className="p-6 sm:p-8 rounded-3xl bg-orange-500 border-[2.5px] border-slate-900 text-white shadow-[6px_6px_0px_0px_#0f172a] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 print:p-4 print:rounded-2xl print:gap-4 print:break-inside-avoid">
+                      <div className="space-y-2 print:space-y-1">
+                        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black bg-white border-2 border-slate-900 text-slate-900 shadow-[1.5px_1.5px_0px_0px_#0f172a] print:py-0.5 print:text-[10px]">
+                          <Sparkles className="w-3.5 h-3.5 text-orange-600 print:w-3 print:h-3" />
+                          <span>HASIL REKOMENDASI RESMI</span>
+                        </div>
+                        <h2 className="text-2xl sm:text-3xl font-heading font-black tracking-tight text-white drop-shadow-sm print:text-xl">
                           Rekomendasi Laboratorium KKSI
                         </h2>
-                        <p className="text-xs sm:text-sm text-orange-50 max-w-xl leading-relaxed font-medium">
+                        <p className="text-xs sm:text-sm text-orange-50 max-w-xl leading-relaxed font-medium print:text-[11px] print:max-w-md">
                           Berikut adalah urutan laboratorium yang paling sesuai dengan rekam akademik, penguasaan tools, dan minat keilmuan Anda.
                         </p>
                       </div>
 
                       {/* Ringkasan Mahasiswa */}
-                      <div className="flex sm:flex-col gap-3 sm:gap-2 bg-white p-4 rounded-2xl border-2 border-slate-900 text-slate-900 text-xs shrink-0 shadow-[3px_3px_0px_0px_#0f172a]">
+                      <div className="flex sm:flex-col gap-3 sm:gap-2 bg-white p-4 rounded-2xl border-2 border-slate-900 text-slate-900 text-xs shrink-0 shadow-[3px_3px_0px_0px_#0f172a] print:p-3 print:rounded-xl print:text-[11px]">
                         <div className="flex justify-between gap-5 font-bold">
                           <span className="text-slate-500">Semester:</span>
                           <strong className="text-slate-900">{formData['Semester Pendaftaran']}</strong>
@@ -371,13 +396,22 @@ export default function App() {
                     </div>
 
                     {/* Dua Kartu Rekomendasi Utama (#1) & Cadangan (#2) */}
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
-                      <div className="lg:col-span-7 flex flex-col">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch print:grid-cols-12 print:gap-3 print:break-inside-avoid">
+                      <div className="lg:col-span-7 print:col-span-7 flex flex-col">
                         <LabCard labData={primaryLab} isPrimary={true} />
                       </div>
-                      <div className="lg:col-span-5 flex flex-col">
+                      <div className="lg:col-span-5 print:col-span-5 flex flex-col">
                         <LabCard labData={backupLab} isPrimary={false} />
                       </div>
+                    </div>
+
+                    {/* Pembatas Halaman Cetak ke Halaman 2 */}
+                    <div className="hidden print:block print-page-break" />
+
+                    {/* Header Mini Khusus Halaman 2 */}
+                    <div className="hidden print:flex items-center justify-between pb-2 mb-3 border-b border-slate-300 text-xs font-bold text-slate-700">
+                      <span>Laporan Hasil Rekomendasi KKSI - Halaman 2</span>
+                      <span className="text-slate-500 text-[10px] font-normal">Analisis Profil Kompetensi & Komparasi Laboratorium</span>
                     </div>
 
                     {/* Radar Visualisasi Profil Kompetensi */}
@@ -385,6 +419,18 @@ export default function App() {
 
                     {/* Tabel Pemeringkatan 4 Laboratorium */}
                     <RankTable rankings={allRankings} />
+
+                    {/* Catatan Validasi Resmi Dokumen (Bagian Bawah Halaman 2) */}
+                    <div className="hidden print:flex items-center justify-between pt-4 text-[10px] text-slate-500 border-t border-slate-300 mt-4 print:break-inside-avoid">
+                      <div>
+                        <p className="font-bold text-slate-900">Departemen Sistem Informasi &bull; Universitas Andalas</p>
+                        <p>Kelompok Keilmuan Sistem Informasi (KKSI)</p>
+                      </div>
+                      <div className="text-right">
+                        <p>Dokumen ini diterbitkan secara otomatis oleh sistem</p>
+                        <p className="font-bold text-emerald-800">Tervalidasi Sistem Rekomendasi KKSI</p>
+                      </div>
+                    </div>
 
                     {/* Tombol Aksi Akhir */}
                     <div className="p-6 bg-white rounded-3xl border-2 border-slate-900 shadow-[4px_4px_0px_0px_#0f172a] flex flex-col sm:flex-row items-center justify-between gap-4 print:hidden">

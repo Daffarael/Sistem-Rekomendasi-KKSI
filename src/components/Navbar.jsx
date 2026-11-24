@@ -10,7 +10,7 @@ export default function Navbar({ onReset, hasResult, isRecommenderOpen, onStart,
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-[#FDFBF7]/95 backdrop-blur-md">
+    <header className="sticky top-0 z-50 bg-[#FDFBF7]/95 backdrop-blur-md print:hidden">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
         {/* Brand Identity Text */}
         <div className="flex flex-col justify-center select-none">

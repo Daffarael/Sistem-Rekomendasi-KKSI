@@ -89,3 +89,96 @@
 .animate-fadeIn {
   animation: fadeIn 0.12s ease-out forwards;
 }
+
+
+/* ==========================================================================
+   PRINT / PDF EXPORT STYLES (Tata Letak Resmi Laporan A4 2 Halaman Presisi)
+   ========================================================================== */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 8mm 10mm 8mm 10mm;
+  }
+
+  html, body {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    font-size: 10pt !important;
+    line-height: 1.35 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Sembunyikan semua tombol navigasi dan elemen interaktif */
+  header,
+  nav,
+  footer,
+  button,
+  .print\:hidden {
+    display: none !important;
+  }
+
+  .print\:block {
+    display: block !important;
+  }
+
+  .print\:flex {
+    display: flex !important;
+  }
+
+  .print\:grid {
+    display: grid !important;
+  }
+
+  /* Hilangkan bayangan box-shadow tebal agar cetak bersih, tajam & hemat tinta */
+  *, *::before, *::after {
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  /* Cegah elemen terbelah/terpotong di tengah halaman */
+  .print-avoid-break,
+  .break-inside-avoid,
+  .rounded-3xl,
+  .rounded-2xl,
+  table,
+  tr {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  /* Atur pemisah halaman yang presisi */
+  .print-page-break {
+    break-before: page !important;
+    page-break-before: always !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+  }
+
+  /* Border rapi dan tegas saat print */
+  .border-\[2\.5px\],
+  .border-2 {
+    border-width: 1.5px !important;
+    border-color: #0f172a !important;
+  }
+
+  /* Container hasil cetak mengisi lebar A4 secara proporsional */
+  main {
+    padding: 0 !important;
+    margin: 0 !important;
+    background: transparent !important;
+  }
+
+  .max-w-5xl {
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Penyesuaian spacing vertikal agar pas di 2 lembar A4 */
+  .space-y-8 > :not([hidden]) ~ :not([hidden]) {
+    margin-top: 10px !important;
+  }
+}
