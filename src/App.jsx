@@ -143,7 +143,7 @@ export default function App() {
     } catch (err) {
       console.error('Inference error:', err);
       setApiError(
-        'Gagal menghubungi backend API (http://127.0.0.1:5000). Pastikan backend Flask sudah aktif dengan perintah "python api.py".'
+        `Gagal menghubungi backend API (${API_BASE_URL}). Pastikan server backend sedang aktif.`
       );
     } finally {
       setIsLoading(false);
