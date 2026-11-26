@@ -9,8 +9,7 @@ export default defineConfig({
   build: {
     rollupOptions: {
       input: {
-        main: 'index.html',
-        kksi: 'kksi.html'
+        main: 'index.html'
       }
     }
   }

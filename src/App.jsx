@@ -125,7 +125,16 @@ export default function App() {
       });
 
       if (!response.ok) {
-        throw new Error(`Server merespon dengan status: ${response.status}`);
+        let serverError = `Server merespon dengan status: ${response.status}`;
+        try {
+          const errBody = await response.json();
+          if (errBody?.error) serverError = errBody.error;
+          else if (errBody?.message) serverError = errBody.message;
+        } catch (_) {
+          // Abaikan jika body bukan JSON
+        }
+        setApiError(serverError);
+        return;
       }
 
       const data = await response.json();
@@ -143,7 +152,9 @@ export default function App() {
     } catch (err) {
       console.error('Inference error:', err);
       setApiError(
-        `Gagal menghubungi backend API (${API_BASE_URL}). Pastikan server backend sedang aktif.`
+        err?.message?.includes('Server merespon')
+          ? err.message
+          : `Gagal menghubungi backend API (${API_BASE_URL}). Pastikan server backend sedang aktif.`
       );
     } finally {
       setIsLoading(false);

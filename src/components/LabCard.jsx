@@ -51,11 +51,18 @@ export default function LabCard({ labData, isPrimary }) {
               <p className="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed print:text-[9px] print:leading-tight">
                 {meta.tagline}
               </p>
-              <div className="pt-1 print:hidden">
+              <div className="pt-1 print:hidden flex flex-wrap items-center gap-2">
                 <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 border border-slate-900 text-emerald-950 text-xs font-bold shadow-[1.5px_1.5px_0px_0px_#0f172a]">
                   <CheckCircle2 className="w-3.5 h-3.5 text-emerald-700 stroke-[2.5]" />
                   <span>Kecocokan Tertinggi Berdasarkan Profil Anda</span>
                 </div>
+                {labData.cosine_similarity !== undefined && labData.xgb_probability !== undefined && (
+                  <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white border border-slate-900 text-slate-800 text-[11px] font-bold shadow-[1.5px_1.5px_0px_0px_#0f172a]">
+                    <span>Cosine: {Number(labData.cosine_similarity).toFixed(1)}%</span>
+                    <span className="text-slate-300">|</span>
+                    <span>XGB: {Number(labData.xgb_probability).toFixed(1)}%</span>
+                  </div>
+                )}
               </div>
             </div>
 
@@ -109,9 +116,18 @@ export default function LabCard({ labData, isPrimary }) {
                 {labData.disqualification_reason}
               </p>
             ) : (
-              <p className="text-[11px] text-slate-500 font-medium italic pt-1 print:hidden">
-                Opsi alternatif jika rekomendasi utama telah memenuhi kuota.
-              </p>
+              <div className="pt-1 print:hidden space-y-1">
+                <p className="text-[11px] text-slate-500 font-medium italic">
+                  Opsi alternatif jika rekomendasi utama telah memenuhi kuota.
+                </p>
+                {labData.cosine_similarity !== undefined && labData.xgb_probability !== undefined && (
+                  <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-white border border-slate-300 text-slate-700 text-[10px] font-bold">
+                    <span>Cosine: {Number(labData.cosine_similarity).toFixed(1)}%</span>
+                    <span className="text-slate-300">|</span>
+                    <span>XGB: {Number(labData.xgb_probability).toFixed(1)}%</span>
+                  </div>
+                )}
+              </div>
             )}
           </div>
 

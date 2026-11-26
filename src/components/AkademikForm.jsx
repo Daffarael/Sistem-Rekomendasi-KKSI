@@ -44,8 +44,9 @@ export default function AkademikForm({ formData, onChange, onNext }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!formData['IPK Kumulatif'] || parseFloat(formData['IPK Kumulatif']) <= 0) {
-      alert('Mohon masukkan nilai IPK Kumulatif Anda dengan benar (format: 0.00 - 4.00).');
+    const ipkVal = parseFloat(String(formData['IPK Kumulatif']).replace(',', '.'));
+    if (isNaN(ipkVal) || ipkVal <= 0.0 || ipkVal > 4.00) {
+      alert('Mohon masukkan nilai IPK Kumulatif Anda dengan benar dalam rentang 0.00 hingga 4.00.');
       return;
     }
     onNext();
@@ -105,11 +106,13 @@ export default function AkademikForm({ formData, onChange, onNext }) {
         </div>
 
         <div>
-          <label className="block text-xs sm:text-sm font-black text-slate-900 mb-2">
+          <label htmlFor="ipk-kumulatif" className="block text-xs sm:text-sm font-black text-slate-900 mb-2">
             IPK Kumulatif Berjalan <span className="text-orange-600">*</span>
           </label>
           <div className="relative">
             <input
+              id="ipk-kumulatif"
+              name="ipk-kumulatif"
               type="number"
               step="0.01"
               min="0.00"

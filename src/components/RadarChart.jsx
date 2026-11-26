@@ -2,17 +2,31 @@ import React from 'react';
 import { Compass } from 'lucide-react';
 
 export default function RadarChart({ formData, rankings }) {
-  const gradeMap = { A: 4.0, 'A-': 3.75, 'B+': 3.5, B: 3.0, 'B-': 2.75, 'C+': 2.5, C: 2.0, D: 1.0, E: 0.0 };
+  const gradeMap = {
+    A: 4.0,
+    'A-': 3.75,
+    'B+': 3.5,
+    B: 3.0,
+    'B-': 2.75,
+    'C+': 2.5,
+    C: 2.0,
+    D: 1.0,
+    E: 0.0,
+    'Belum Mengambil': 0.0,
+    'Belum Mengambil / Sedang Ditempuh (Belum Ada KHS)': 0.0
+  };
 
   const getMatkulScore = (...keys) => {
-    let letter = 'B';
+    let letter = null;
     for (const k of keys) {
-      if (formData?.[k]) {
+      if (formData?.[k] !== undefined && formData?.[k] !== null && formData?.[k] !== '') {
         letter = formData[k];
         break;
       }
     }
-    return ((gradeMap[letter] || 3.0) / 4.0) * 100.0;
+    if (letter === null) return 0.0;
+    const scoreVal = gradeMap[letter] ?? 0.0;
+    return (scoreVal / 4.0) * 100.0;
   };
 
   const getToolScore = (key) => {
@@ -46,9 +60,8 @@ export default function RadarChart({ formData, rankings }) {
 
   // Pilar 3: Proses Bisnis & Enterprise (SE)
   const scoreEnterprise = Math.round(
-    0.25 * getMatkulScore('Nilai Manajemen Proses Bisnis', 'Nilai Analisis dan Perancangan Bisnis') +
-    0.20 * getMatkulScore('Nilai SIM', 'Nilai Sistem Informasi Manajemen') +
-    0.15 * getToolScore('Tools Pemodelan BPMN') +
+    0.40 * getMatkulScore('Nilai Manajemen Proses Bisnis') +
+    0.20 * getToolScore('Tools Pemodelan BPMN') +
     0.20 * getToolScore('Tools ERP & Bisnis') +
     0.20 * getMinatScore('Minat Proses Bisnis & ERP')
   );
@@ -158,14 +171,14 @@ export default function RadarChart({ formData, rankings }) {
                 );
               })}
 
-              {/* Grid Percentage Labels on Top Axis */}
+              {/* Grid Percentage Labels on Top Axis (Diberi offset rapi agar tidak berhimpitan) */}
               {gridLevels.map((lvl) => {
                 const pt = getCoordinates(0, lvl);
                 return (
                   <text
                     key={lvl}
-                    x={pt.x + 5}
-                    y={pt.y - 2}
+                    x={pt.x + 8}
+                    y={pt.y + 3}
                     fontSize="9"
                     fontWeight="800"
                     fill="#64748b"
