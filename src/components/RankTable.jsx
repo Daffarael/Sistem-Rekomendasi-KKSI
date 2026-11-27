@@ -138,12 +138,6 @@ export default function RankTable({ rankings }) {
                           style={{ width: `${Math.min(100, Math.max(0, score))}%` }}
                         />
                       </div>
-                      {item.cosine_similarity !== undefined && item.xgb_probability !== undefined && (
-                        <div className="flex justify-between text-[10px] text-slate-500 font-bold print:hidden">
-                          <span>Cos: {Number(item.cosine_similarity).toFixed(1)}%</span>
-                          <span>XGB: {Number(item.xgb_probability).toFixed(1)}%</span>
-                        </div>
-                      )}
                     </div>
                   </td>
 
